@@ -8,12 +8,14 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -61,9 +63,28 @@ fun MyScreenContent() {
 fun NameList(names: List<String> = List(1000) { "Hello $it" }, modifier: Modifier = Modifier) {
     LazyColumn(modifier = modifier) {
         items(names) {
-            Greeting(it)
+            var checkState by remember {
+                mutableStateOf(false)
+            }
+
+            NameItem(name = it, checkState = checkState) { isChecked ->
+                checkState = isChecked
+            }
             Divider()
         }
+    }
+}
+
+@Composable
+fun NameItem(name: String, checkState: Boolean, onCheckedChange: (Boolean) -> Unit) {
+    Row {
+        Checkbox(
+            checked = checkState,
+            onCheckedChange = { checked ->
+                onCheckedChange(checked)
+            }, modifier = Modifier.align(Alignment.CenterVertically)
+        )
+        Greeting(name)
     }
 }
 
@@ -104,5 +125,14 @@ fun Greeting(name: String) {
 fun DefaultPreview() {
     MyApp {
         MyScreenContent()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun NameItemPreview() {
+    Column {
+        NameItem(name = "This is unchecked", checkState = false, onCheckedChange = {})
+        NameItem(name = "This is checked", checkState = true, onCheckedChange = {})
     }
 }
