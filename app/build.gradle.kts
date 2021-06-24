@@ -41,11 +41,11 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion = rootProject.extra["compose_version"] as String
-        kotlinCompilerVersion = "1.4.32"
     }
 }
 
 dependencies {
+    implementation("com.google.accompanist:accompanist-coil:0.12.0")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.0")
 
