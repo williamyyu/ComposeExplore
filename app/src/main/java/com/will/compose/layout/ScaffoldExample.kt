@@ -1,4 +1,4 @@
-package com.will.compose
+package com.will.compose.layout
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding

@@ -1,4 +1,4 @@
-package com.will.compose
+package com.will.compose.layout
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -40,7 +40,7 @@ fun ImageList() {
             }
         }
 
-        LazyColumn(modifier = Modifier.fillMaxWidth(), state = scrollState) {
+        LazyColumn(state = scrollState) {
             items(listSize) {
                 ImageListItem(it)
             }
